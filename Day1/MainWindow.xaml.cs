@@ -21,7 +21,7 @@ namespace Day1
         {
             if (InputText.Text.Trim() != "")
             {
-                var lines = InputText.Text.Split("\r\n");
+                var lines = InputText.Text.Split(Environment.NewLine);
                 var caloriesList = new List<int>();
                 var caloriesCount = 0;
                 foreach (var item in lines)
@@ -38,8 +38,11 @@ namespace Day1
                         caloriesCount = 0;
                     }
                 }
-                var results = caloriesList.OrderByDescending(x => x).Take(3).Sum(y => y);
-                OutputText.Text = string.Join(Environment.NewLine, results);
+
+                var resultFirst = $"Most Calories: {caloriesList.OrderByDescending(x => x).FirstOrDefault()}";
+                var resultSecond = $"Top 3 Calories Combined: {caloriesList.OrderByDescending(x => x).Take(3).Sum(y => y)}";
+
+                OutputText.Text = resultFirst + Environment.NewLine + resultSecond;
             }
         }
     }
